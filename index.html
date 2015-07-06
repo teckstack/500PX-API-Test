@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>500PX API Test</title>
+    <link rel="stylesheet" href="http://teckstack.com/tsdir/wp-content/themes/ts15/css/style.css">
+    <style>
+    	article{
+			overflow: hidden;
+			max-height: 150px;	
+		}
+		h2{
+			margin: 35px 0 50px;
+			text-align: center;	
+		}
+    </style>
+</head>
+
+<body>
+	<header id="masthead" role="banner">
+		<nav id="topNav" class="navbar navbar-fixed-top" role="navigation">
+		  <div class="container">
+		
+			<div class="navbar-header">
+			  <h1 class="site-title">
+				<a class="navbar-brand" href="http://teckstack.com/" title="TeckStack" rel="home"><img src="http://teckstack.com/tsdir/wp-content/themes/ts15/images/logo.png" alt="TeckStack.com"></a>
+			  </h1>
+			</div>
+			<div class="navbar-collapse collapse">
+				
+				<ul id="menu-categories" class="nav navbar-nav">
+                	<li><a href="/create-portfolio-with-500px-apis">&lt;&lt; Back to Article</a></li>
+				</ul>
+          	</div>
+		  </div>
+		</nav>
+   	</header>
+    
+    <div class="container">
+        <h2>500PX API Test</h2>
+        <div id="grid"></div>
+    </div>
+    
+    <script src="500px.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            _500px.init({
+                sdk_key: '531a4729e713df5c781905595c0b96ca2fb0737d'
+            });
+
+            // Get my user id
+            _500px.api('/users', function(response) {
+                var me = "DevJayswal";
+                var siteurl = "http://500px.com/photo/"
+
+                // Get my favorites
+                _500px.api('/photos', {
+                    feature: 'user',
+                    username: me,
+                    total_items: 5000
+                }, function(response) {
+                    if (response.data.photos.length == 0) {
+                        alert('Nothing found! Please refresh...');
+                    } else {
+                        $.each(response.data.photos, function() {
+                            $('#grid').append('<article class="post col-md-3 col-sm-4 col-xs-12 panel panel-default"><h3>' + this.name + '</h3><a href="' + siteurl + this.id + '" target="_blank"><img src="' + this.image_url + '" /></a></article>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
