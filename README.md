@@ -12,7 +12,7 @@ http://teckstack.com/create-portfolio-with-500px-apis
 <br>
 
 **View Demo**: <br>
-http://kutec.github.io/500PX-API-Test/
+http://teckstack.github.io/500PX-API-Test/
 <br><br>
 
 **Steps**:
